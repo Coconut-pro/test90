@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>症状自评量表 SCL-90</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- 首页界面 -->
+    <div id="homepage" class="page active">
+        <div class="container">
+            <div class="header">
+                <h1>症状自评量表 SCL-90</h1>
+                <div class="subtitle">心理健康症状自评测试</div>
+            </div>
+            
+            <div class="description">
+                <p>症状自评量表（Self-reporting Inventory)，又名90项症状清单（SCL-90），时也叫做Hopkin's症状清单，本测验共90个自我评定项目。测验的九个因子分别为：躯体化、强迫症状、人际关系敏感、抑郁、焦虑、敌对、恐怖、情感、思维偏执及精神病性。</p>
+                <p>量表只是辅助筛查工具，可以发现和了解自己的情绪状态，测试结果仅供参考，不代表实际诊断。</p>
+                
+                <div class="instructions">
+                    <h3>提示：</h3>
+                    <p>请仔细阅读以下每一条陈述，并根据您最近一周内的实际感受，选择最适合的答案。</p>
+                </div>
+            </div>
+            
+            <div class="start-section" id="startSection">
+                <button id="startBtn" class="start-btn">开始测试</button>
+                <div id="timeLimit" class="time-limit-msg" style="display: none;">
+                    <p>您已超过24小时访问限制，无法进行测试。</p>
+                </div>
+            </div>
+
+            <!-- 答题部分（初始隐藏） -->
+            <div id="questionSection" style="display: none;">
+                <div class="progress-info">
+                    <span id="currentQuestion">1</span> / <span id="totalQuestions">90</span>
+                    <div class="progress-bar">
+                        <div id="progressFill" class="progress-fill"></div>
+                    </div>
+                </div>
+                
+                <div class="question-section">
+                    <div class="question-number">第 <span id="questionNum">1</span> 题</div>
+                    <div class="question-text" id="questionText">头痛</div>
+                    
+                    <div class="options">
+                        <label class="option">
+                            <input type="radio" name="answer" value="1">
+                            <span class="option-text">1 - 从无</span>
+                        </label>
+                        <label class="option">
+                            <input type="radio" name="answer" value="2">
+                            <span class="option-text">2 - 很轻</span>
+                        </label>
+                        <label class="option">
+                            <input type="radio" name="answer" value="3">
+                            <span class="option-text">3 - 中等</span>
+                        </label>
+                        <label class="option">
+                            <input type="radio" name="answer" value="4">
+                            <span class="option-text">4 - 偏重</span>
+                        </label>
+                        <label class="option">
+                            <input type="radio" name="answer" value="5">
+                            <span class="option-text">5 - 严重</span>
+                        </label>
+                    </div>
+                </div>
+                
+                <div class="navigation">
+                    <button id="prevBtn" class="nav-btn" disabled>上一题</button>
+                    <button id="nextBtn" class="nav-btn">下一题</button>
+                    <button id="submitBtn" class="submit-btn" style="display: none;">提交测试</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 评分界面 -->
+    <div id="resultpage" class="page">
+        <div class="container">
+            <div class="result-header">
+                <h2>测试结果</h2>
+                <div class="test-date" id="testDate"></div>
+            </div>
+            
+            <div class="result-content">
+                <div class="overall-score">
+                    <h3>总体评估</h3>
+                    <div class="score-summary" id="scoreSummary"></div>
+                </div>
+                
+                <div class="factor-scores">
+                    <h3>各因子得分详情</h3>
+                    <div id="factorResults"></div>
+                </div>
+                
+                <div class="recommendations">
+                    <h3>建议</h3>
+                    <div id="recommendations"></div>
+                </div>
+            </div>
+            
+            <div class="result-actions">
+                <button id="restartBtn" class="restart-btn">重新测试</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
