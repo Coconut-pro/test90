@@ -311,57 +311,89 @@ function generateRecommendations(scores) {
 // 显示测试结果
 function showResults() {
     const scores = calculateFactorScores();
-    const recommendations = generateRecommendations(scores);
-    
-    // 更新测试日期
-    const testDate = document.getElementById('testDate');
-    testDate.textContent = new Date().toLocaleDateString('zh-CN');
-    
-    // 更新总体评估
-    const scoreSummary = document.getElementById('scoreSummary');
-    scoreSummary.innerHTML = `
-        <div class="score-item">
-            <span class="score-label">总分：</span>
-            <span class="score-value">${scores.totalScore.toFixed(2)}</span>
-        </div>
-        <div class="score-item">
-            <span class="score-label">平均分：</span>
-            <span class="score-value">${scores.overallAverage.toFixed(2)}</span>
-        </div>
-        <div class="score-item">
-            <span class="score-label">评估级别：</span>
-            <span class="score-value ${getScoreClass(scores.overallAverage)}">${getAssessmentLevel(scores.overallAverage)}</span>
-        </div>
-        <div class="score-item">
-            <span class="score-label">阳性项目数：</span>
-            <span class="score-value">${scores.positiveItems}</span>
-        </div>
-        <div class="score-item">
-            <span class="score-label">阴性项目数：</span>
-            <span class="score-value">${scores.negativeItems}</span>
-        </div>
-        <div class="score-item">
-            <span class="score-label">阳性症状均分：</span>
-            <span class="score-value">${scores.positiveSymptomsScore.toFixed(2)}</span>
-        </div>
-    `;
-    
-    // 更新因子分数
-    const factorResults = document.getElementById('factorResults');
-    factorResults.innerHTML = '';
+
+    // 更新总分显示
+    const totalScoreDisplay = document.getElementById('totalScoreDisplay');
+    const averageScoreDisplay = document.getElementById('averageScoreDisplay');
+    totalScoreDisplay.textContent = Math.round(scores.totalScore);
+    averageScoreDisplay.textContent = scores.overallAverage.toFixed(2);
+
+    // 更新因子得分表格
+    const factorTableBody = document.getElementById('factorTableBody');
+    factorTableBody.innerHTML = '';
+
     for (const [factor, data] of Object.entries(scores.factorScores)) {
-        const scoreClass = getScoreClass(data.average);
-        factorResults.innerHTML += `
-            <div class="factor-item">
-                <span class="factor-name">${factor}</span>
-                <span class="factor-score ${scoreClass}">${data.average.toFixed(2)}</span>
+        const statusClass = getStatusClass(data.average);
+        const statusText = getStatusText(data.average);
+
+        const row = document.createElement('tr');
+        row.innerHTML = `
+            <td class="factor-name">${factor}</td>
+            <td>${Math.round(data.sum)}</td>
+            <td>${data.average.toFixed(2)}</td>
+            <td><span class="status-tag ${statusClass}">${statusText}</span></td>
+        `;
+        factorTableBody.appendChild(row);
+    }
+
+    // 生成因子解释说明
+    generateFactorExplanations(scores.factorScores);
+}
+
+// 生成因子解释说明
+function generateFactorExplanations(factorScores) {
+    const factorExplanations = document.getElementById('factorExplanations');
+    factorExplanations.innerHTML = '';
+
+    // 因子解释文本
+    const factorDescriptions = {
+        '躯体化': '主要反映身体不适感，包括心血管、胃肠道、呼吸和其他系统的主诉不适，以及头痛、背痛、肌肉酸痛、焦虑等躯体不适表现。',
+        '强迫症状': '主要指那些明知没有必要，但又无法摆脱的无意义的思想、冲动、行为等表现，还有一些比较一般的认知障碍的行为征象也在这一因子中反映。',
+        '人际关系敏感': '主要是指某些个人不自在感和自卑感，特别是与其他人相比较时更突出。在人际交往中的自卑感、心神不安、明显不自在，以及人际关系中的不良自我暗示，消极的期待等是这方面症状的典型原因。',
+        '抑郁': '反映抑郁苦闷的感情与心境，还以对生活的兴趣减退，动力缺乏，活力丧失等为代表的一些症状，还反映失望、悲观以及与抑郁相联系的认知和躯体方面的感受，另外，还包括死亡的思想和自杀观念。',
+        '焦虑': '一般指那些烦躁、坐立不安、神经过敏、紧张以及由此产生的躯体征象，如震颤等。',
+        '敌对': '主要从思想、感情及行为三方面来反映病人的敌对表现。其项目包括厌烦的感觉、摔物、争论、不可控制的脾气暴发，以及仇恨他人的冲动等。',
+        '恐怖': '恐怖的定义与传统的恐怖状态或广场恐怖所反映的内容是一致的，包括对出行、空旷场所、人群或公共场所和交通工具的恐怖。除此之外，还有社交恐怖。',
+        '偏执': '主要指投射性思维、敌对、猜疑、关系观念、被动体验、妄想等。',
+        '精神病性': '反映各式各样的精神病性行为，项目包括幻听、思维播散、被控制感、思维被插入等明显的精神病性症状的项目，也包括一些反映精神分裂样行为的项目。该因子提供了一个连续性水平的精神病性行为的测定。',
+        '其他': '包括睡眠及饮食障碍等。'
+    };
+
+    for (const [factor, data] of Object.entries(factorScores)) {
+        if (data.average > 1.5) { // 只显示需要关注的因子
+            const explanationDiv = document.createElement('div');
+            const riskClass = getRiskClass(data.average);
+            explanationDiv.className = `factor-explanation ${riskClass}`;
+
+            const statusTag = `<span class="status-tag ${getStatusClass(data.average)}">${getStatusText(data.average)}</span>`;
+
+            explanationDiv.innerHTML = `
+                <div class="factor-title">
+                    ${factor} ${statusTag}
+                </div>
+                <div class="factor-description">
+                    ${factorDescriptions[factor] || '该因子的详细说明暂未提供。'}
+                </div>
+            `;
+
+            factorExplanations.appendChild(explanationDiv);
+        }
+    }
+
+    // 如果没有需要关注的因子，显示正常状态说明
+    if (factorExplanations.children.length === 0) {
+        const normalDiv = document.createElement('div');
+        normalDiv.className = 'factor-explanation';
+        normalDiv.innerHTML = `
+            <div class="factor-title">
+                整体状况 <span class="status-tag status-normal">正常</span>
+            </div>
+            <div class="factor-description">
+                恭喜您！您的各项心理健康指标都在正常范围内。请继续保持良好的生活习惯和积极的心态，定期关注自己的心理健康状况。
             </div>
         `;
+        factorExplanations.appendChild(normalDiv);
     }
-    
-    // 更新建议
-    const recommendationsDiv = document.getElementById('recommendations');
-    recommendationsDiv.innerHTML = recommendations.map(rec => `<p>${rec}</p>`).join('');
 }
 
 // 获取评估级别
@@ -378,6 +410,30 @@ function getScoreClass(score) {
     if (score <= 2.5) return "score-mild";
     if (score <= 3.5) return "score-moderate";
     return "score-severe";
+}
+
+// 获取状态标签的CSS类
+function getStatusClass(score) {
+    if (score <= 1.5) return "status-normal";
+    if (score <= 2.5) return "status-mild";
+    if (score <= 3.5) return "status-moderate";
+    return "status-severe";
+}
+
+// 获取状态文本
+function getStatusText(score) {
+    if (score <= 1.5) return "正常";
+    if (score <= 2.5) return "轻度";
+    if (score <= 3.5) return "中度";
+    return "重度";
+}
+
+// 获取风险等级CSS类
+function getRiskClass(score) {
+    if (score <= 1.5) return "";
+    if (score <= 2.5) return "needs-attention";
+    if (score <= 3.5) return "moderate-risk";
+    return "high-risk";
 }
 
 // 事件监听器

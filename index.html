@@ -80,29 +80,78 @@
 
     <!-- 评分界面 -->
     <div id="resultpage" class="page">
-        <div class="container">
-            <div class="result-header">
-                <h2>测试结果</h2>
-                <div class="test-date" id="testDate"></div>
+        <div class="result-container">
+            <!-- 顶部标题区域 -->
+            <div class="result-title-section">
+                <h1>SCL-90症状自评量表</h1>
+                <p class="result-subtitle">测试结果仅供参考，不作诊断使用</p>
             </div>
-            
-            <div class="result-content">
-                <div class="overall-score">
-                    <h3>总体评估</h3>
-                    <div class="score-summary" id="scoreSummary"></div>
-                </div>
-                
-                <div class="factor-scores">
-                    <h3>各因子得分详情</h3>
-                    <div id="factorResults"></div>
-                </div>
-                
-                <div class="recommendations">
-                    <h3>建议</h3>
-                    <div id="recommendations"></div>
+
+            <!-- 总分显示区域 -->
+            <div class="total-score-section">
+                <div class="score-label">您的SCL-90总分</div>
+                <div class="total-score" id="totalScoreDisplay">0</div>
+                <div class="average-score">单项平均分：<span id="averageScoreDisplay">0.00</span></div>
+            </div>
+
+            <!-- 各因子得分表格 -->
+            <div class="factor-table-section">
+                <h3>各因子分数及测试情况</h3>
+                <table class="factor-table">
+                    <thead>
+                        <tr>
+                            <th>因子名称</th>
+                            <th>总分</th>
+                            <th>平均分</th>
+                            <th>测试情况</th>
+                        </tr>
+                    </thead>
+                    <tbody id="factorTableBody">
+                        <!-- 动态生成内容 -->
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- 因子解释说明 -->
+            <div class="factor-explanations" id="factorExplanations">
+                <!-- 动态生成内容 -->
+            </div>
+
+            <!-- 结果解释部分 -->
+            <div class="result-interpretation">
+                <h3>结果解释</h3>
+                <div class="interpretation-content">
+                    <p>该量表反映的心理症状并不是诊断，无论分数高低，都一定要到，其它相关科室就诊。</p>
+                    <p>SCL-90心理健康自评量表是测量个体精神症状、疾病严重程度、人际关系、生活习惯等多个维度，它为临床一般心理症状的评定，能够准确地反映被试者当前心理状况的深度、广度和严重程度，是评估个体心理健康状况的重要工具。</p>
+                    <p>各条目均反映各种症状，请根据最近感受的情况在适当分数面前划圈或打勾方式回答，回答时不要考虑你的症状的原因，是否合理等问题，只要根据你的实际感受回答即可。</p>
+                    <p>如果你发现自己在某个维度上出现明显不适，不要害怕自己一些不好的，过度消极自己的内在感受，接受自己目前的状态，要学会和自己的情绪、感受和谐相处，包括不愉快的，会对未来充满希望，会对自己宽容，心理健康需要自己的努力。</p>
+                    <p>要知道，心理健康需要自身的努力和坚持，而不，本量表的结果对于心理咨询具有重要意义。</p>
+
+                    <div class="score-ranges">
+                        <h4>测试情况分级标准：</h4>
+                        <div class="score-range-item">
+                            <span class="range-tag normal">正常</span>
+                            <span class="range-text">平均分1.0-2.0分，症状较轻微很少出现</span>
+                        </div>
+                        <div class="score-range-item">
+                            <span class="range-tag mild">轻度</span>
+                            <span class="range-text">平均分2.0-3.0分，症状较明显但不影响日常生活</span>
+                        </div>
+                        <div class="score-range-item">
+                            <span class="range-tag moderate">中度</span>
+                            <span class="range-text">平均分3.0-4.0分，症状明显且对日常生活造成一定影响</span>
+                        </div>
+                        <div class="score-range-item">
+                            <span class="range-tag severe">重度</span>
+                            <span class="range-text">平均分4.0-5.0分，症状严重且明显影响日常生活</span>
+                        </div>
+                    </div>
+
+                    <p class="disclaimer">按中国常模标准，总体的SCL-90总分超过160分，单项分的测试分数超过中等一般水平，您最好去大学的心理咨询师咨询进行心理咨询，可考虑去心理咨询，大学生的心理状况严重，需要接受专业上心理咨询，进行医疗或接受专门的心理治疗。</p>
                 </div>
             </div>
-            
+
+            <!-- 重新测试按钮 -->
             <div class="result-actions">
                 <button id="restartBtn" class="restart-btn">重新测试</button>
             </div>

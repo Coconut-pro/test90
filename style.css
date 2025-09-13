@@ -57,30 +57,294 @@ body {
 
 /* 结果页样式 */
 #resultpage {
-    padding-top: 40px;
-    padding-bottom: 60px;
     min-height: 100vh;
-    background: linear-gradient(135deg, #2196F3 0%, #1976D2 100%);
+    background: #f5f5f5;
+    padding: 20px 0;
     z-index: 10;
 }
 
 #resultpage.active {
-    display: flex;
-    align-items: flex-start;
-    justify-content: center;
+    display: block;
 }
 
-#resultpage .container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    width: 100%;
+.result-container {
+    max-width: 800px;
+    margin: 0 auto;
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    overflow: hidden;
 }
 
-.recommendations p {
-    white-space: pre-line;
-    line-height: 1.8;
+/* 结果页面顶部标题区域 */
+.result-title-section {
+    background: linear-gradient(135deg, #4CAF50, #45a049);
+    color: white;
+    text-align: center;
+    padding: 30px 20px;
+}
+
+.result-title-section h1 {
+    font-size: 1.8em;
+    margin: 0 0 10px 0;
+    font-weight: bold;
+}
+
+.result-subtitle {
+    font-size: 1em;
+    margin: 0;
+    opacity: 0.9;
+}
+
+/* 总分显示区域 */
+.total-score-section {
+    text-align: center;
+    padding: 40px 20px;
+    background: white;
+}
+
+.score-label {
+    font-size: 1.1em;
+    color: #666;
+    margin-bottom: 15px;
+}
+
+.total-score {
+    font-size: 3em;
+    font-weight: bold;
+    color: #4CAF50;
+    margin-bottom: 10px;
+}
+
+.average-score {
+    font-size: 1em;
+    color: #666;
+}
+
+.average-score span {
+    font-weight: bold;
+    color: #333;
+}
+
+/* 因子得分表格 */
+.factor-table-section {
+    padding: 30px 20px;
+    background: white;
+}
+
+.factor-table-section h3 {
+    font-size: 1.3em;
+    color: #333;
     margin-bottom: 20px;
+    text-align: center;
+}
+
+.factor-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+}
+
+.factor-table th {
+    background: #f8f9fa;
+    padding: 12px 8px;
+    text-align: center;
+    font-weight: bold;
+    color: #333;
+    border: 1px solid #dee2e6;
+}
+
+.factor-table td {
+    padding: 12px 8px;
+    text-align: center;
+    border: 1px solid #dee2e6;
+}
+
+.factor-name {
+    text-align: left !important;
+    font-weight: 500;
+}
+
+.status-tag {
+    display: inline-block;
+    padding: 4px 12px;
+    border-radius: 15px;
+    font-size: 0.9em;
+    font-weight: bold;
+    color: white;
+}
+
+.status-normal {
+    background: #4CAF50;
+}
+
+.status-mild {
+    background: #FF9800;
+}
+
+.status-moderate {
+    background: #FF5722;
+}
+
+.status-severe {
+    background: #F44336;
+}
+
+/* 因子解释说明 */
+.factor-explanations {
+    padding: 20px;
+    background: #f8f9fa;
+}
+
+.factor-explanation {
+    margin-bottom: 25px;
+    padding: 15px;
+    background: white;
+    border-radius: 8px;
+    border-left: 4px solid #4CAF50;
+}
+
+.factor-explanation.needs-attention {
+    border-left-color: #FF9800;
+}
+
+.factor-explanation.moderate-risk {
+    border-left-color: #FF5722;
+}
+
+.factor-explanation.high-risk {
+    border-left-color: #F44336;
+}
+
+.factor-title {
+    font-size: 1.1em;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 8px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.factor-description {
+    color: #666;
+    line-height: 1.6;
+    font-size: 0.95em;
+}
+
+/* 结果解释部分 */
+.result-interpretation {
+    padding: 30px 20px;
+    background: #f8f9fa;
+}
+
+.result-interpretation h3 {
+    font-size: 1.3em;
+    color: #333;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.interpretation-content {
+    background: white;
+    padding: 25px;
+    border-radius: 8px;
+    line-height: 1.6;
+}
+
+.interpretation-content p {
+    margin-bottom: 15px;
+    color: #555;
+    text-align: justify;
+}
+
+.score-ranges {
+    margin: 25px 0;
+    padding: 20px;
+    background: #f8f9fa;
+    border-radius: 8px;
+}
+
+.score-ranges h4 {
+    font-size: 1.1em;
+    color: #333;
+    margin-bottom: 15px;
+    text-align: center;
+}
+
+.score-range-item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 12px;
+    padding: 8px 0;
+}
+
+.range-tag {
+    display: inline-block;
+    padding: 4px 12px;
+    border-radius: 15px;
+    font-size: 0.9em;
+    font-weight: bold;
+    color: white;
+    min-width: 50px;
+    text-align: center;
+    margin-right: 15px;
+}
+
+.range-tag.normal {
+    background: #4CAF50;
+}
+
+.range-tag.mild {
+    background: #FF9800;
+}
+
+.range-tag.moderate {
+    background: #FF5722;
+}
+
+.range-tag.severe {
+    background: #F44336;
+}
+
+.range-text {
+    color: #555;
+    flex: 1;
+}
+
+.disclaimer {
+    margin-top: 20px;
+    padding: 15px;
+    background: #fff3cd;
+    border: 1px solid #ffeaa7;
+    border-radius: 8px;
+    color: #856404;
+    font-size: 0.95em;
+    text-align: justify;
+}
+
+/* 重新测试按钮区域 */
+.result-actions {
+    text-align: center;
+    padding: 30px 20px;
+    background: white;
+}
+
+.restart-btn {
+    background: linear-gradient(45deg, #4CAF50, #45a049);
+    color: white;
+    border: none;
+    padding: 12px 40px;
+    font-size: 1.1em;
+    border-radius: 25px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 10px rgba(76, 175, 80, 0.3);
+}
+
+.restart-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px rgba(76, 175, 80, 0.4);
 }
 
 .header {
@@ -528,6 +792,148 @@ body {
         padding: 15px;
         max-width: 100%;
     }
+
+    /* 结果页面手机端适配 */
+    #resultpage {
+        padding: 10px 0;
+    }
+
+    .result-container {
+        margin: 0 10px;
+        border-radius: 8px;
+    }
+
+    .result-title-section {
+        padding: 20px 15px;
+    }
+
+    .result-title-section h1 {
+        font-size: 1.5em;
+    }
+
+    .result-subtitle {
+        font-size: 0.9em;
+    }
+
+    .total-score-section {
+        padding: 30px 15px;
+    }
+
+    .total-score {
+        font-size: 2.5em;
+    }
+
+    .factor-table-section {
+        padding: 20px 15px;
+    }
+
+    .factor-table-section h3 {
+        font-size: 1.2em;
+    }
+
+    .factor-table th,
+    .factor-table td {
+        padding: 8px 4px;
+        font-size: 0.9em;
+    }
+
+    .factor-table th:first-child,
+    .factor-table td:first-child {
+        width: 30%;
+    }
+
+    .factor-table th:nth-child(2),
+    .factor-table td:nth-child(2),
+    .factor-table th:nth-child(3),
+    .factor-table td:nth-child(3) {
+        width: 20%;
+    }
+
+    .factor-table th:last-child,
+    .factor-table td:last-child {
+        width: 30%;
+    }
+
+    .status-tag {
+        padding: 3px 8px;
+        font-size: 0.8em;
+    }
+
+    .factor-explanations {
+        padding: 15px;
+    }
+
+    .factor-explanation {
+        padding: 12px;
+        margin-bottom: 15px;
+    }
+
+    .factor-title {
+        font-size: 1em;
+        margin-bottom: 6px;
+    }
+
+    .factor-description {
+        font-size: 0.9em;
+        line-height: 1.5;
+    }
+
+    .result-interpretation {
+        padding: 20px 15px;
+    }
+
+    .interpretation-content {
+        padding: 20px 15px;
+    }
+
+    .interpretation-content p {
+        font-size: 0.95em;
+        margin-bottom: 12px;
+    }
+
+    .score-ranges {
+        padding: 15px;
+        margin: 20px 0;
+    }
+
+    .score-ranges h4 {
+        font-size: 1em;
+        margin-bottom: 12px;
+    }
+
+    .score-range-item {
+        flex-direction: column;
+        align-items: flex-start;
+        margin-bottom: 10px;
+        padding: 6px 0;
+    }
+
+    .range-tag {
+        margin-right: 0;
+        margin-bottom: 5px;
+        min-width: 45px;
+        font-size: 0.8em;
+        padding: 3px 10px;
+    }
+
+    .range-text {
+        font-size: 0.9em;
+    }
+
+    .disclaimer {
+        padding: 12px;
+        font-size: 0.9em;
+        margin-top: 15px;
+    }
+
+    .result-actions {
+        padding: 20px 15px;
+    }
+
+    .restart-btn {
+        padding: 10px 30px;
+        font-size: 1em;
+    }
     
     .header h1 {
         font-size: 1.8em;
@@ -690,6 +1096,105 @@ body {
 @media (max-width: 480px) {
     .container {
         padding: 10px;
+    }
+
+    /* 小屏结果页面适配 */
+    .result-container {
+        margin: 0 5px;
+    }
+
+    .result-title-section {
+        padding: 15px 10px;
+    }
+
+    .result-title-section h1 {
+        font-size: 1.3em;
+    }
+
+    .total-score-section {
+        padding: 25px 10px;
+    }
+
+    .total-score {
+        font-size: 2.2em;
+    }
+
+    .factor-table-section {
+        padding: 15px 10px;
+    }
+
+    .factor-table th,
+    .factor-table td {
+        padding: 6px 2px;
+        font-size: 0.8em;
+    }
+
+    .factor-explanations {
+        padding: 10px;
+    }
+
+    .factor-explanation {
+        padding: 10px;
+        margin-bottom: 12px;
+    }
+
+    .factor-title {
+        font-size: 0.95em;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 5px;
+    }
+
+    .factor-description {
+        font-size: 0.85em;
+    }
+
+    .result-interpretation {
+        padding: 15px 10px;
+    }
+
+    .interpretation-content {
+        padding: 15px 10px;
+    }
+
+    .interpretation-content p {
+        font-size: 0.9em;
+        margin-bottom: 10px;
+    }
+
+    .score-ranges {
+        padding: 12px;
+        margin: 15px 0;
+    }
+
+    .score-ranges h4 {
+        font-size: 0.95em;
+        margin-bottom: 10px;
+    }
+
+    .range-tag {
+        min-width: 40px;
+        font-size: 0.75em;
+        padding: 2px 8px;
+    }
+
+    .range-text {
+        font-size: 0.85em;
+    }
+
+    .disclaimer {
+        padding: 10px;
+        font-size: 0.85em;
+        margin-top: 12px;
+    }
+
+    .result-actions {
+        padding: 15px 10px;
+    }
+
+    .restart-btn {
+        padding: 8px 25px;
+        font-size: 0.95em;
     }
 
     .header {
