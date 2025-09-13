@@ -64,6 +64,19 @@ body {
     z-index: 10;
 }
 
+#resultpage.active {
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+}
+
+#resultpage .container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+}
+
 .recommendations p {
     white-space: pre-line;
     line-height: 1.8;
@@ -597,7 +610,8 @@ body {
     /* 结果页面适配 */
     .result-header {
         padding: 20px;
-        margin: 15px;
+        margin: 15px auto;
+        width: calc(100% - 30px);
     }
 
     .result-header h2 {
@@ -606,7 +620,13 @@ body {
 
     .result-content {
         padding: 20px;
-        margin: 15px;
+        margin: 15px auto;
+        width: calc(100% - 30px);
+    }
+
+    .result-actions {
+        margin: 15px auto;
+        width: calc(100% - 30px);
     }
 
     .result-content h3 {
@@ -684,9 +704,15 @@ body {
         font-size: 0.9em;
     }
 
-    .description, .question-section, .result-content {
+    .description, .question-section, .result-content, .result-header {
         padding: 15px;
-        margin: 10px;
+        margin: 10px auto;
+        width: calc(100% - 20px);
+    }
+
+    .result-actions {
+        margin: 10px auto;
+        width: calc(100% - 20px);
     }
 
     .question-text {

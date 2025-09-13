@@ -194,7 +194,7 @@ function calculateFactorScores() {
 function generateRecommendations(scores) {
     let recommendations = [];
     const { overallAverage, factorScores } = scores;
-    
+
     // 总体评估建议
     if (overallAverage <= 1.5) {
         recommendations.push("您的整体心理健康状况良好，请继续保持积极乐观的生活态度。");
@@ -217,70 +217,94 @@ function generateRecommendations(scores) {
 
     // 针对各因子的具体建议
     recommendations.push("\n各维度具体建议：");
-    
+
+    // 检查是否有任何因子需要关注
+    let hasSpecificRecommendations = false;
+
     if (factorScores.躯体化.average > 2) {
         recommendations.push("\n躯体化方面：");
         recommendations.push("• 规律作息，保持充足睡眠");
         recommendations.push("• 适量运动，增强体质");
         recommendations.push("• 进行放松训练，如深呼吸、冥想等");
+        hasSpecificRecommendations = true;
     }
-    
+
     if (factorScores.强迫症状.average > 2) {
         recommendations.push("\n强迫症状方面：");
         recommendations.push("• 学习接纳和放松技巧");
         recommendations.push("• 尝试渐进式暴露训练");
         recommendations.push("• 建立合理的行为目标");
+        hasSpecificRecommendations = true;
     }
-    
+
     if (factorScores.人际关系敏感.average > 2) {
         recommendations.push("\n人际关系方面：");
         recommendations.push("• 培养自信心和自我接纳");
         recommendations.push("• 参加社交活动，扩大社交圈");
         recommendations.push("• 学习沟通技巧");
+        hasSpecificRecommendations = true;
     }
-    
+
     if (factorScores.抑郁.average > 2) {
         recommendations.push("\n抑郁情绪方面：");
         recommendations.push("• 保持规律的作息和生活节奏");
         recommendations.push("• 培养兴趣爱好，增加正向体验");
         recommendations.push("• 寻求专业心理咨询的帮助");
+        hasSpecificRecommendations = true;
     }
-    
+
     if (factorScores.焦虑.average > 2) {
         recommendations.push("\n焦虑情绪方面：");
         recommendations.push("• 学习放松技巧和呼吸法");
         recommendations.push("• 适度运动，释放压力");
         recommendations.push("• 避免咖啡因等刺激性物质");
+        hasSpecificRecommendations = true;
     }
-    
+
     if (factorScores.敌对.average > 2) {
         recommendations.push("\n情绪控制方面：");
         recommendations.push("• 学习情绪管理技巧");
         recommendations.push("• 培养同理心");
         recommendations.push("• 寻找适当的压力释放方式");
+        hasSpecificRecommendations = true;
     }
-    
+
     if (factorScores.恐怖.average > 2) {
         recommendations.push("\n恐惧情绪方面：");
         recommendations.push("• 采用渐进式暴露训练");
         recommendations.push("• 学习应对技巧");
         recommendations.push("• 建立安全感支持系统");
+        hasSpecificRecommendations = true;
     }
-    
+
     if (factorScores.偏执.average > 2) {
         recommendations.push("\n思维方式方面：");
         recommendations.push("• 培养开放和包容的心态");
         recommendations.push("• 增加社会支持网络");
         recommendations.push("• 学习理性思维方式");
+        hasSpecificRecommendations = true;
     }
-    
+
     if (factorScores.精神病性.average > 2) {
         recommendations.push("\n特别注意：");
         recommendations.push("• 建议及时就医检查");
         recommendations.push("• 保持良好的作息规律");
         recommendations.push("• 加强与亲友的沟通和联系");
+        hasSpecificRecommendations = true;
     }
-    
+
+    // 如果没有特定的维度建议，提供通用的健康维护建议
+    if (!hasSpecificRecommendations) {
+        recommendations.push("\n恭喜您！各维度得分都在正常范围内。为了继续保持良好的心理健康状态，建议：");
+        recommendations.push("• 保持规律的作息时间，确保充足的睡眠");
+        recommendations.push("• 坚持适度的体育锻炼，增强身心健康");
+        recommendations.push("• 培养积极的兴趣爱好，丰富精神生活");
+        recommendations.push("• 维护良好的人际关系，多与亲友交流");
+        recommendations.push("• 学会合理安排工作和休息，避免过度压力");
+        recommendations.push("• 定期进行自我反思，关注内心感受");
+        recommendations.push("• 遇到困难时，及时寻求帮助和支持");
+    }
+
     return recommendations;
 }
 
