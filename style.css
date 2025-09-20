@@ -323,6 +323,38 @@ body {
     text-align: justify;
 }
 
+/* 结果页面公众号二维码样式 */
+.result-qr-section {
+    padding: 30px 20px;
+    background: #f8f9fa;
+    text-align: center;
+}
+
+.result-qr-container {
+    background: white;
+    padding: 25px;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    display: inline-block;
+    max-width: 320px;
+}
+
+.result-qr-img {
+    width: 160px;
+    height: 160px;
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.15);
+    margin-bottom: 15px;
+}
+
+.result-qr-text {
+    color: #4a5568;
+    font-size: 1em;
+    margin: 0;
+    line-height: 1.5;
+    font-weight: 500;
+}
+
 /* 重新测试按钮区域 */
 .result-actions {
     text-align: center;
@@ -443,6 +475,8 @@ body {
     border-radius: 10px;
     margin-top: 20px;
 }
+
+
 
 /* 答题页面样式 */
 .test-header {
@@ -934,6 +968,26 @@ body {
         padding: 10px 30px;
         font-size: 1em;
     }
+
+
+
+    .result-qr-section {
+        padding: 20px 15px;
+    }
+
+    .result-qr-container {
+        padding: 20px;
+        max-width: 300px;
+    }
+
+    .result-qr-img {
+        width: 140px;
+        height: 140px;
+    }
+
+    .result-qr-text {
+        font-size: 0.95em;
+    }
     
     .header h1 {
         font-size: 1.8em;
@@ -1195,6 +1249,26 @@ body {
     .restart-btn {
         padding: 8px 25px;
         font-size: 0.95em;
+    }
+
+
+
+    .result-qr-section {
+        padding: 15px 10px;
+    }
+
+    .result-qr-container {
+        padding: 15px;
+        max-width: 270px;
+    }
+
+    .result-qr-img {
+        width: 120px;
+        height: 120px;
+    }
+
+    .result-qr-text {
+        font-size: 0.9em;
     }
 
     .header {

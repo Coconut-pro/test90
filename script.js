@@ -100,7 +100,7 @@ function showPage(pageId) {
         const description = document.querySelector('.description');
         const startSection = document.querySelector('.start-section');
         const questionSection = document.getElementById('questionSection');
-        
+
         if (header) header.style.display = 'block';
         if (description) description.style.display = 'block';
         if (startSection) startSection.style.display = 'block';
@@ -444,7 +444,7 @@ document.addEventListener('DOMContentLoaded', () => {
         document.querySelector('.header').style.display = 'none';
         document.querySelector('.description').style.display = 'none';
         document.querySelector('.start-section').style.display = 'none';
-        
+
         // 显示题目部分
         document.getElementById('questionSection').style.display = 'block';
         updateQuestion();
